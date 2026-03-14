@@ -4,24 +4,18 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "products")
-
- class ProductEntity {
+class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_generator")
     @SequenceGenerator(name = "product_id_generator", sequenceName = "product_id_seq")
     private Long id;
 
     @Column(nullable = false, unique = true)
-    @NotBlank(message = "Product code is required")
-    private String code;
+    @NotBlank(message = "Product code is required") private String code;
 
     @NotBlank(message = "Product name is required") @Column(nullable = false)
     private String name;
@@ -33,8 +27,7 @@ import java.math.BigDecimal;
     @NotNull(message = "Product price is required") @DecimalMin("0.1") @Column(nullable = false)
     private BigDecimal price;
 
-    public ProductEntity() {
-    }
+    public ProductEntity() {}
 
     public ProductEntity(Long id, String code, String name, String description, String imageUrl, BigDecimal price) {
         this.id = id;

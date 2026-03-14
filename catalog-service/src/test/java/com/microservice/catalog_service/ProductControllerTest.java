@@ -1,13 +1,13 @@
 package com.microservice.catalog_service;
 
-import io.restassured.http.ContentType;
-import org.junit.jupiter.api.Test;
-
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 
-public class ProductControllerTest extends AbstractIntegerationTest{
+import io.restassured.http.ContentType;
+import org.junit.jupiter.api.Test;
+
+public class ProductControllerTest extends AbstractIntegerationTest {
 
     @Test
     void shouldReturnProducts() {

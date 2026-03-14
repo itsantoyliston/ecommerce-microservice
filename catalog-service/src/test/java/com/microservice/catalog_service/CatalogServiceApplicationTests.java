@@ -1,11 +1,8 @@
 package com.microservice.catalog_service;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 
-
-class CatalogServiceApplicationTests  extends AbstractIntegerationTest{
+class CatalogServiceApplicationTests extends AbstractIntegerationTest {
 
     @Test
     void contextLoads() {}

@@ -1,6 +1,6 @@
 package com.microservice.catalog_service.domain;
 
- class ProductMapper {
+class ProductMapper {
 
     static Product toProduct(ProductEntity productEntity) {
         return new Product(
