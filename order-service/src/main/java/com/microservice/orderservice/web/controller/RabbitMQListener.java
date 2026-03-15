@@ -1,8 +1,8 @@
 package com.microservice.orderservice.web.controller;
 
+import com.microservice.orderservice.web.controller.RabbitMQDemoController.MyPayload;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
-import com.microservice.orderservice.web.controller.RabbitMQDemoController.MyPayload;
 
 @Service
 public class RabbitMQListener {
