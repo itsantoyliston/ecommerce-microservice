@@ -2,6 +2,7 @@ package com.microservice.orderservice.domain;
 
 import com.microservice.orderservice.domain.models.CreateOrderRequest;
 import com.microservice.orderservice.domain.models.CreateOrderResponse;
+import com.microservice.orderservice.domain.models.OrderValidator;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,12 +15,17 @@ public class OrderService {
     private static final Logger log = LoggerFactory.getLogger(OrderService.class);
 
     private final OrderRepository orderRepository;
+    private final OrderValidator orderValidator;
 
-    public OrderService(OrderRepository orderRepository) {
+    public OrderService(OrderRepository orderRepository, OrderValidator orderValidator) {
         this.orderRepository = orderRepository;
+        this.orderValidator = orderValidator;
     }
 
-    public CreateOrderResponse createOrder(String userName, CreateOrderRequest request) {
+    public CreateOrderResponse createOrder(String userName, CreateOrderRequest request)
+    {
+        orderValidator.validate(request);
+
         OrderEntity newOrder = OrderMapper.convertToEntity(request);
         newOrder.setUserName(userName);
 
