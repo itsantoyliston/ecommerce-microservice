@@ -30,7 +30,6 @@ class OrderMapper {
         return newOrder;
     }
 
-
     static OrderDTO convertToDTO(OrderEntity order) {
         Set<OrderItem> orderItems = order.getItems().stream()
                 .map(item -> new OrderItem(item.getCode(), item.getName(), item.getPrice(), item.getQuantity()))

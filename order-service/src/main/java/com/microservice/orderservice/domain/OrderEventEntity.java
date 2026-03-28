@@ -2,12 +2,11 @@ package com.microservice.orderservice.domain;
 
 import com.microservice.orderservice.domain.models.OrderEventType;
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "order_events")
- class OrderEventEntity {
+class OrderEventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_event_id_generator")
     @SequenceGenerator(name = "order_event_id_generator", sequenceName = "order_event_id_seq")

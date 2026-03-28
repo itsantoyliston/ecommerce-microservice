@@ -1,7 +1,6 @@
 package com.microservice.orderservice.domain;
 
 import com.microservice.orderservice.domain.models.*;
-
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
@@ -18,6 +17,7 @@ public class OrderEventMapper {
                 order.getDeliveryAddress(),
                 LocalDateTime.now());
     }
+
     static OrderDeliveredEvent buildOrderDeliveredEvent(OrderEntity order) {
         return new OrderDeliveredEvent(
                 UUID.randomUUID().toString(),
@@ -49,7 +49,6 @@ public class OrderEventMapper {
                 reason,
                 LocalDateTime.now());
     }
-
 
     private static Set<OrderItem> getOrderItems(OrderEntity order) {
         return order.getItems().stream()

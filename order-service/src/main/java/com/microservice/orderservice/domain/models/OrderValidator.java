@@ -2,11 +2,10 @@ package com.microservice.orderservice.domain.models;
 
 import com.microservice.orderservice.clients.ProductServiceClient;
 import com.microservice.orderservice.web.controller.exception.InvalidOrderException;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import java.util.Set;
 
 @Component
 public class OrderValidator {

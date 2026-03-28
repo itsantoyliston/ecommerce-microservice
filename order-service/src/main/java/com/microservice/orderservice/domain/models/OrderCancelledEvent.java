@@ -3,13 +3,11 @@ package com.microservice.orderservice.domain.models;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-public record OrderCancelledEvent (
+public record OrderCancelledEvent(
         String eventId,
         String orderNumber,
         Set<OrderItem> items,
         Customer customer,
         Address deliveryAddress,
         String reason,
-        LocalDateTime createdAt
-){
-}
+        LocalDateTime createdAt) {}
