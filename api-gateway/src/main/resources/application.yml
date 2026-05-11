@@ -7,9 +7,11 @@ management:
     web:
       exposure:
         include: "*"
+
   metrics:
     tags:
       application: ${spring.application.name}
+
   tracing:
     enabled: false
     sampling:
@@ -18,32 +20,43 @@ management:
 spring:
   application:
     name: api-gateway
+
   cloud:
     gateway:
       server:
         webflux:
           routes:
+
+            # =========================
+            # Catalog Service
+            # =========================
             - id: catalog-service
-              uri: ${CATALOG_SERVICE_URL:http://localhost:8080}
+              uri: ${CATALOG_SERVICE_URL:http://catalog-service:8080}
               predicates:
                 - Path=/catalog/**
               filters:
                 - RewritePath=/catalog/?(?<segment>.*), /${segment}
+
+            # =========================
+            # Orders Service
+            # =========================
             - id: orders-service
-              uri: ${ORDER_SERVICE_URL:http://localhost:8082}
+              uri: ${ORDER_SERVICE_URL:http://order-service:8082}
               predicates:
                 - Path=/orders/**
               filters:
                 - RewritePath=/orders/?(?<segment>.*), /${segment}
+
+            # =========================
+            # OpenAPI Aggregation
+            # =========================
             - id: openapi
               uri: http://localhost:${server.port}
               predicates:
                 - Path=/v3/api-docs/**
               filters:
-                - RewritePath=/v3/api-docs/?(?<segment>.*), /${segment}/v3/api-docs
-          discovery:
-            locator:
-              enabled: true
+                - RewritePath=/v3/api-docs/(?<segment>.*), /${segment}/v3/api-docs
+
           globalcors:
             cors-configurations:
               '[/**]':
@@ -51,18 +64,15 @@ spring:
                 allowed-methods: "*"
                 allowed-headers: "*"
                 allow-credentials: false
+
           default-filters:
             - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Methods Access-Control-Allow-Headers RETAIN_FIRST
-
-  mvc:
-    problemdetails:
-      enabled: true
 
 springdoc:
   swagger-ui:
     use-root-path: true
-#    urls:
-#      - name: catalog
-#        url: /v3/api-docs/catalog
-#      - name: orders
-#        url: /v3/api-docs/orders
+#      urls:
+#        - name: catalog-service
+#          url: /catalog/v3/api-docs
+#        - name: order-service
+#          url: /orders/v3/api-docs
