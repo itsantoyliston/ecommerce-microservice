@@ -102,3 +102,19 @@ services:
       resources:
         limits:
           memory: 700m
+
+  ecommerce-webapp:
+    image: antonyliston/ecommerce-webapp:latest
+    container_name: ecommerce-webapp
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - ECOMMERCE_API_GATEWAY_URL=http://api-gateway:8989
+    ports:
+      - "8484:8484"
+    restart: unless-stopped
+    depends_on:
+      - api-gateway
+    deploy:
+      resources:
+        limits:
+          memory: 700m
